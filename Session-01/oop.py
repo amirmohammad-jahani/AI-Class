@@ -17,3 +17,5 @@ n2 = Student("Sara",20,"Network")
 print(f"Name : {n1.name} , Id : {n1.student_id} , Major : {n1.major} ")
 print(f"Name : {n2.name} , Id : {n2.student_id} , Major : {n2.major} ")
 
+
+
