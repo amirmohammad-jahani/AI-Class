@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn import tree
 from sklearn.model_selection import train_test_split
-
+from sklearn.metrics import accuracy_score,confusion_matrix, ConfusionMatrixDisplay, classification_report
 data = {
     "income": [
         25, 45, 18, 60, 35, 12, 80, 50, 22, 70,
@@ -61,9 +61,41 @@ model = tree.DecisionTreeClassifier(max_depth=5)
 model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test,y_pred)
 
-print("Predictions:", y_pred)
-print("Actual:", y_test.values)
+print("Accuracy", accuracy * 100)
+
+cm = confusion_matrix(y_test, y_pred)
+
+print("Confusion Matrix:")
+print(cm)
+
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=["Rejected", "Approved"]
+)
+
+disp.plot(cmap="Blues")
+
+plt.title("Confusion Matrix")
+plt.show()
+
+# Plot Decision Tree
+plt.figure(figsize=(20, 10))
+
+tree.plot_tree(
+    model,
+    feature_names=X.columns,
+    class_names=["Rejected", "Approved"],
+    filled=True,
+    rounded=True,
+    fontsize=9
+)
+
+plt.title("Decision Tree Visualization")
+plt.show()
+
+
 
 
 
